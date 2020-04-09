@@ -1,7 +1,54 @@
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script><div>
+<!DOCTYPE html>
+<head>
+    <html lang="en"></html>
+    <meta charset="utf-8"/>
+    <title>SNDI</title>
+    <style>
+        body{
+            max-width: 800px;
+            font-family:sans-serif;
+            text-align: center;
+            margin:auto;
+        }
+
+        h2{
+            padding-top: 1em;
+            text-align: justify;
+        }
+
+        h3{
+            text-decoration: underline;
+        }
+
+        p{
+            text-align: justify;
+        }
+
+        div{
+            margin:auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <h2 class = "title">
+        <a href="../../canada.html">Canada</a>
+        /
+        <a href="qc.html">Quebec</a>
+        /
+        Montreal
+    </h2>
+    <p>Explore Montreal on the <a href="https://sprawlmap.org/#10/45.5142/-73.6638">sprawlmap</a>.</p>
         
-        
-            <div id="1c28fd34-7d36-4e4d-a531-367b89e8f1d5" class="plotly-graph-div" style="height:600px; width:800px;"></div>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <div>
+        <h3>Cumulative sprawl</h3>
+        <img src="img/Montreal-tile.gif" width="600px">
+        <div id="1c28fd34-7d36-4e4d-a531-367b89e8f1d5" class="plotly-graph-div" style="height:600px; width:800px;"></div>
             <script type="text/javascript">
                 
                     window.PLOTLYENV=window.PLOTLYENV || {};
@@ -16,10 +63,14 @@
                 };
                 
             </script>
-        </div><div>
-        
-        
-            <div id="4d0b1d05-fb15-476b-a99f-b8526a2c10ce" class="plotly-graph-div" style="height:600px; width:800px;"></div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Street expansion</h3>
+        <p>I had an error generating the street gif! </p>
+
+        <div id="4d0b1d05-fb15-476b-a99f-b8526a2c10ce" class="plotly-graph-div" style="height:600px; width:800px;"></div>
             <script type="text/javascript">
                 
                     window.PLOTLYENV=window.PLOTLYENV || {};
@@ -53,3 +104,6 @@
                 
             </script>
         </div>
+    </div>
+
+</body>
