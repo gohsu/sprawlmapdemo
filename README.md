@@ -1,6 +1,6 @@
-# Canada
+# sprawlmapdemo
 
-Repo for sprawlmap outreach mockup & miscellaneous data explorations.
+Repo for sprawlmap region pages mockup & miscellaneous data explorations.
 
 ## Demo
 * [Canada](canada/canada.html)
