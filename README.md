@@ -3,7 +3,7 @@
 Repo for sprawlmap region pages mockup & miscellaneous data explorations.
 
 ## Demo
-* [Canada](canada/canada.html)
+* [Canada](canada/page.html)
 
 ## Programs
 * `time_graphs.py` is a cmd line program taking a city name as input and outputs a html file with the plotly graphs. 
