@@ -7,6 +7,7 @@ Repo for sprawlmap region pages mockup & miscellaneous data explorations.
 
 ## Programs
 * `time_graphs.py` is a cmd line program taking a city name as input and outputs a html file with the plotly graphs. 
+* `plots.py` is a cmd line program taking an FUA name as input and outputs a html file with regional comparison plots.
 
 ## Data
 * `city-sndi.csv` from [this](https://sprawl.research.mcgill.ca/publications/2020-PNAS-sprawl/cities-ranked-pca1.html)
