@@ -13,117 +13,151 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import mpld3
-import os
-from docopt import docopt
 
-def missing_values(data):
-    if 1 <= len(data) <= 4:
-        data_copy = np.copy(data)
-        if ~np.isfinite(data[2]):
-            data_copy[2] = data_copy[3]
-        if ~np.isfinite(data[1]):
-            data_copy[1] = data_copy[2]
-        if ~np.isfinite(data[0]):
-            data_copy[0] = data_copy[1]
-        mask = np.isfinite(data_copy)
-        line, = plt.plot(years, data_copy[mask], lw=1, ls="--", color="grey")
 
 def to_htmlfile_wlink(arg, arg_lat, arg_lon):
     # write image as html
-    htmlfile = open("{}.html".format(arg.replace(" ","")), 'a+')
-    htmlfile.write('<p>See {} on the <a target=”_blank” href="https://sprawlmap.org/#5/{}/{}">sprawlmap</a>.</p>'.format(arg, arg_lat, arg_lon))
+    htmlfile = open("{}.html".format(arg.replace(" ", "")), 'a+')
+    htmlfile.write(
+        '<p>See {} on the <a target=”_blank” href="https://sprawlmap.org/#5/{}/{}">sprawlmap</a>.</p>'.format(arg,
+                                                                                                              arg_lat,
+                                                                                                              arg_lon))
     htmlfile.write((mpld3.fig_to_html(fig)))
+    htmlfile.close()
 
-def to_htmlfile(arg):
+
+def to_htmlfile(arg, fig):
     # write image as html
-    htmlfile = open("{}.html".format(arg.replace(" ","")), 'a+')
+    htmlfile = open("{}.html".format(arg.replace(" ", "")), 'a+')
     htmlfile.write((mpld3.fig_to_html(fig)))
+    htmlfile.close()
 
-def plot_city(arg_city):
-    city = fua_df.query('efua_name == @arg_city').head(1)
+
+def plot_city(arg_city):  # returns the plot as a Figure object
+    city_df = fua_df.query('efua_name == @arg_city')
+    city_df = city_df.sort_values(by=["fua_p_2015"], ascending=False)
+    city = city_df.head(1)  # largest FUA represents that city
     if city.empty:
-        exit("Location not found.")
-
+        exit("City not found.")
     # fill data
     loc_pca = np.array(city[loc_pca_cols].values.reshape(-1))
     id1_pca = np.array(city[id1_pca_cols].values.reshape(-1))
     iso_pca = np.array(city[iso_pca_cols].values.reshape(-1))
-
     # make the plot
-    if ~np.all(np.isnan(loc_pca)):  # if we have data for the local sndi, plot
-        missing_values(loc_pca)
-        plt.plot(years, loc_pca, color='red', marker='o', label=arg_city)
-    missing_values(id1_pca)
-    plt.plot(years, id1_pca, color='navy', marker='o', lw=1.5, label="Regional ({})".format(city['name_1'].values[0]))
-    missing_values(iso_pca)
-    plt.plot(years, iso_pca, color='blue', marker='o', lw=1.5, label="National ({})".format(city['name_0'].values[0]))
-    ax.set_title('Cumulative SNDi over time')
+    fig, ax = plt.subplots()
+    xs = np.arange(4)
+    ax.set_xticks(xs)
+    ax.set_xticklabels(labels=years)
+    mask = np.isfinite(loc_pca)
+    ax.plot(xs[mask], loc_pca[mask], color='red', marker='o', lw=2, label=arg_city)
+    mask_id1 = np.isfinite(id1_pca)
+    ax.plot(xs[mask_id1], id1_pca[mask_id1], color='navy', marker='o', markersize=5, lw=1, label="Regional ({})".format(city['name_1'].values[0]))
+    mask_iso = np.isfinite(iso_pca)
+    ax.plot(xs[mask_iso], iso_pca[mask_iso], color='blue', marker='o', markersize=5, lw=1, label="National ({})".format(city['name_0'].values[0]))
+    ax.set_title('SNDi in {}'.format(arg_city))
     ax.set_ylabel('SNDi')
     ax.set_xlabel('Years')
-    plt.legend()
+    ax.legend()
     fig.tight_layout()
-    to_htmlfile(arg_city)
+    return fig
 
 
-def plot_regional(arg_region):
-    region_df = fua_df[fua_df["name_1"]==arg_region]
-    # plot the region's pca
+def plot_regional(arg_region):  # returns the plot as a Figure object
+    region_df = fua_df[fua_df["name_1"] == arg_region]
+    region_df = region_df[region_df["name_0"] == region_df["cntry_name"]]  # make sure cities are from the same country
+    region_df = region_df.sort_values(by=["fua_p_2015"], ascending=False)  # sort by population size for comparison
+    # make the plot
+    fig, ax = plt.subplots()
+    xs = np.arange(4)
+    ax.set_xticks(xs)
+    ax.set_xticklabels(labels=years)
     id1_pca = np.array(region_df[id1_pca_cols].head(1).values.reshape(-1))
-    plt.plot(years, id1_pca, color="red", label=arg_region)
+    mask_id1 = np.isfinite(id1_pca)
+    ax.plot(xs[mask_id1], id1_pca[mask_id1], color="red", marker='o', lw=2, label=arg_region)
+    # cities for comparison
     cities_list = region_df["efua_name"].unique()
-    # plot cities
+    if len(cities_list) > 5:
+        cities_list = cities_list[0:4]  # only take (up to) 4 most populous cities
     for i in range(0, len(cities_list)):
         this_city = cities_list[i]
         city_query = region_df.query('efua_name == @this_city').head(1)
         city_pca = np.array(city_query[loc_pca_cols].values.reshape(-1))
-        plt.plot(years, city_pca, label=this_city)
-    ax.set_title('Cumulative SNDi over time')
+        mask_city = np.isfinite(city_pca)
+        ax.plot(xs[mask_city], city_pca[mask_city], marker='o', markersize=5, lw=1.5, label=this_city)
+    ax.set_title('SNDi in {}'.format(arg_region))
     ax.set_ylabel('SNDi')
     ax.set_xlabel('Years')
-    plt.legend(loc='lower center', ncol=4)
+    ax.legend()
     fig.tight_layout()
-    to_htmlfile_wlink(arg_region, region_df["id1_geom_centroid_lat"].head(1).values[0], region_df["id1_geom_centroid_lon"].head(1).values[0])
-    
+    return fig
 
-def plot_national(arg_country):
-    country_df = fua_df[fua_df["name_0"]==arg_country]
-    # plot the region's pca
+
+def plot_national(arg_country):  # returns the plot as a Figure object
+    country_df = fua_df[fua_df["name_0"] == arg_country]
+    country_df = country_df.groupby(["name_1"]).head(1)  # get a row for each region
+    # plot the region's sndi
+    fig, ax = plt.subplots()
+    xs = np.arange(4)
+    ax.set_xticks(xs)
+    ax.set_xticklabels(labels=years)
     iso_pca = np.array(country_df[iso_pca_cols].head(1).values.reshape(-1))
-    plt.plot(years, iso_pca, color="red", label=arg_country)
-    region_list = country_df["name_1"].unique()
-    # plot regions
-    for i in range(0, len(region_list)):
-        this_region = region_list[i]
+    mask_iso = np.isfinite(iso_pca)
+    ax.plot(xs[mask_iso], iso_pca[mask_iso], color="red", marker='o', lw=2, label=arg_country)
+    # plot regions for comparison
+    random_regions_list = np.random.choice(country_df["name_1"], 4)
+    ax.set_xticks(ticks=range(0, len(years)))
+    ax.set_xticklabels(labels=years)
+    for i in range(0, len(random_regions_list)):
+        this_region = random_regions_list[i]
         region_query = country_df.query('name_1 == @this_region').head(1)
         region_pca = np.array(region_query[id1_pca_cols].values.reshape(-1))
-        plt.plot(years, region_pca, label=this_region)
-    ax.set_title('Cumulative SNDi over time')
+        mask_region = np.isfinite(region_pca)
+        ax.plot(xs[mask_region], region_pca[mask_region], marker='o', markersize=5, lw=1.5, label=this_region)
+    ax.set_title('SNDi in {}'.format(arg_country))
     ax.set_ylabel('SNDi')
     ax.set_xlabel('Years')
-    plt.legend(loc='lower center', ncol=4)
+    ax.legend()
     fig.tight_layout()
-    to_htmlfile_wlink(arg_country, country_df["iso_geom_centroid_lat"].head(1).values[0], country_df["iso_geom_centroid_lon"].head(1).values[0])
-    
+    return fig
 
-fua_df = pd.read_csv("data/FUA_master_pca.csv", encoding='utf-8')
 
-# column names:
-loc_pca_cols = ["pca1_cum_1975","pca1_cum_1990", "pca1_cum_2000", "pca1_cum_2014"]
-id1_pca_cols = ["id1_pca1_cum_1975","id1_pca1_cum_1990", "id1_pca1_cum_2000", "id1_pca1_cum_2014"]
-iso_pca_cols = ["iso_pca1_cum_1975","iso_pca1_cum_1990", "iso_pca1_cum_2000", "iso_pca1_cum_2014"]
+if __name__ == '__main__':
+    # import docopt
+    # # find particular row
+    # args = docopt(__doc__)
 
-years = ["<1975", "1976-1990","1991-2000", "2001-2014"]
-fig, ax = plt.subplots()
-plt.xticks(ticks=range(0,len(years)), labels=years)
+    fua_df = pd.read_pickle("data/FUA_master_ultra_wide_with_contextual_comparisons.pandas")
 
-# find particular row
-args = docopt(__doc__) 
-if args["-r"]:
-    arg = args['<location>']
-    plot_regional(arg)
-elif args["-n"]:
-    arg = args['<location>']
-    plot_national(arg)
-else:
-    arg = args['<location>']
-    plot_city(arg)
+    # set up cols for data
+    loc_pca_cols = []
+    id1_pca_cols = []
+    iso_pca_cols = []
+    year_cols = ["1975", "1990", "2000", "2014"]
+    incremental = True  # TODO: arg?
+    mode = "inc_"
+    if not incremental:
+        mode = "cum_"
+    for year in year_cols:
+        loc_pca_cols.append("pca1_" + mode + year)
+        id1_pca_cols.append("id1_pca1_" + mode + year)
+        iso_pca_cols.append("iso_pca1_" + mode + year)
+
+    years = ["<1975", "1976-1990", "1991-2000", "2001-2014"]  # for x-axis labelling
+
+    plt.style.use('seaborn')
+    params = {'axes.titlesize': 20,
+              'axes.labelsize': 16,
+              'xtick.labelsize': 12,
+              'ytick.labelsize': 12,
+              'legend.fontsize': 12}
+    plt.rcParams.update(params)
+
+    plot_national("United States").show()
+
+    # arg = args['<location>']
+    # if args["-r"]:
+    #     plot_regional(arg)
+    # elif args["-n"]:
+    #     plot_national(arg)
+    # else:
+    #     plot_city(arg)
