@@ -12,25 +12,6 @@ Options:
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import mpld3
-
-
-def to_htmlfile_wlink(arg, arg_lat, arg_lon):
-    # write image as html
-    htmlfile = open("{}.html".format(arg.replace(" ", "")), 'a+')
-    htmlfile.write(
-        '<p>See {} on the <a target=”_blank” href="https://sprawlmap.org/#5/{}/{}">sprawlmap</a>.</p>'.format(arg,
-                                                                                                              arg_lat,
-                                                                                                              arg_lon))
-    htmlfile.write((mpld3.fig_to_html(fig)))
-    htmlfile.close()
-
-
-def to_htmlfile(arg, fig):
-    # write image as html
-    htmlfile = open("{}.html".format(arg.replace(" ", "")), 'a+')
-    htmlfile.write((mpld3.fig_to_html(fig)))
-    htmlfile.close()
 
 
 def plot_city(arg_city):  # returns the plot as a Figure object
@@ -49,12 +30,12 @@ def plot_city(arg_city):  # returns the plot as a Figure object
     ax.set_xticks(xs)
     ax.set_xticklabels(labels=years)
     mask = np.isfinite(loc_pca)
-    ax.plot(xs[mask], loc_pca[mask], color='red', marker='o', lw=2, label=arg_city)
+    ax.plot(xs[mask], loc_pca[mask], color='red', marker='o', lw=2, label=arg_city, zorder=10)  # city plot
     mask_id1 = np.isfinite(id1_pca)
     ax.plot(xs[mask_id1], id1_pca[mask_id1], color='navy', marker='o', markersize=5, lw=1, label="Regional ({})".format(city['name_1'].values[0]))
     mask_iso = np.isfinite(iso_pca)
     ax.plot(xs[mask_iso], iso_pca[mask_iso], color='blue', marker='o', markersize=5, lw=1, label="National ({})".format(city['name_0'].values[0]))
-    ax.set_title('SNDi in {}'.format(arg_city))
+    # ax.set_title('SNDi in {}'.format(arg_city))
     ax.set_ylabel('SNDi')
     ax.set_xlabel('Years')
     ax.legend()
@@ -64,7 +45,10 @@ def plot_city(arg_city):  # returns the plot as a Figure object
 
 def plot_regional(arg_region):  # returns the plot as a Figure object
     region_df = fua_df[fua_df["name_1"] == arg_region]
+    if region_df.empty:
+        exit("Region not found.")
     region_df = region_df[region_df["name_0"] == region_df["cntry_name"]]  # make sure cities are from the same country
+    # ^^ this line might cause problems bc cntry_name has no spaces... figure this out l8r
     region_df = region_df.sort_values(by=["fua_p_2015"], ascending=False)  # sort by population size for comparison
     # make the plot
     fig, ax = plt.subplots()
@@ -73,10 +57,10 @@ def plot_regional(arg_region):  # returns the plot as a Figure object
     ax.set_xticklabels(labels=years)
     id1_pca = np.array(region_df[id1_pca_cols].head(1).values.reshape(-1))
     mask_id1 = np.isfinite(id1_pca)
-    ax.plot(xs[mask_id1], id1_pca[mask_id1], color="red", marker='o', lw=2, label=arg_region)
+    ax.plot(xs[mask_id1], id1_pca[mask_id1], color="red", marker='o', lw=2, label=arg_region, zorder=10)  # region plot
     # cities for comparison
     cities_list = region_df["efua_name"].unique()
-    if len(cities_list) > 5:
+    if len(cities_list) > 4:
         cities_list = cities_list[0:4]  # only take (up to) 4 most populous cities
     for i in range(0, len(cities_list)):
         this_city = cities_list[i]
@@ -84,7 +68,7 @@ def plot_regional(arg_region):  # returns the plot as a Figure object
         city_pca = np.array(city_query[loc_pca_cols].values.reshape(-1))
         mask_city = np.isfinite(city_pca)
         ax.plot(xs[mask_city], city_pca[mask_city], marker='o', markersize=5, lw=1.5, label=this_city)
-    ax.set_title('SNDi in {}'.format(arg_region))
+    # ax.set_title('SNDi in {}'.format(arg_region))
     ax.set_ylabel('SNDi')
     ax.set_xlabel('Years')
     ax.legend()
@@ -94,6 +78,8 @@ def plot_regional(arg_region):  # returns the plot as a Figure object
 
 def plot_national(arg_country):  # returns the plot as a Figure object
     country_df = fua_df[fua_df["name_0"] == arg_country]
+    if country_df.empty:
+        exit("Country not found.")
     country_df = country_df.groupby(["name_1"]).head(1)  # get a row for each region
     # plot the region's sndi
     fig, ax = plt.subplots()
@@ -102,9 +88,9 @@ def plot_national(arg_country):  # returns the plot as a Figure object
     ax.set_xticklabels(labels=years)
     iso_pca = np.array(country_df[iso_pca_cols].head(1).values.reshape(-1))
     mask_iso = np.isfinite(iso_pca)
-    ax.plot(xs[mask_iso], iso_pca[mask_iso], color="red", marker='o', lw=2, label=arg_country)
+    ax.plot(xs[mask_iso], iso_pca[mask_iso], color="red", marker='o', lw=2, label=arg_country, zorder=10)  # country plot
     # plot regions for comparison
-    random_regions_list = np.random.choice(country_df["name_1"], 4)
+    random_regions_list = np.random.choice(country_df.name_1, 4, replace = False)
     ax.set_xticks(ticks=range(0, len(years)))
     ax.set_xticklabels(labels=years)
     for i in range(0, len(random_regions_list)):
@@ -113,13 +99,12 @@ def plot_national(arg_country):  # returns the plot as a Figure object
         region_pca = np.array(region_query[id1_pca_cols].values.reshape(-1))
         mask_region = np.isfinite(region_pca)
         ax.plot(xs[mask_region], region_pca[mask_region], marker='o', markersize=5, lw=1.5, label=this_region)
-    ax.set_title('SNDi in {}'.format(arg_country))
+    # ax.set_title('SNDi in {}'.format(arg_country))
     ax.set_ylabel('SNDi')
     ax.set_xlabel('Years')
     ax.legend()
     fig.tight_layout()
     return fig
-
 
 if __name__ == '__main__':
     # import docopt
@@ -127,13 +112,14 @@ if __name__ == '__main__':
     # args = docopt(__doc__)
 
     fua_df = pd.read_pickle("data/FUA_master_ultra_wide_with_contextual_comparisons.pandas")
+    fua_df["name_1"] = ((fua_df["name_1"]).str.encode('latin-1')).str.decode('utf-8')  # fix encoding problem
 
     # set up cols for data
     loc_pca_cols = []
     id1_pca_cols = []
     iso_pca_cols = []
     year_cols = ["1975", "1990", "2000", "2014"]
-    incremental = True  # TODO: arg?
+    incremental = True
     mode = "inc_"
     if not incremental:
         mode = "cum_"
@@ -152,8 +138,6 @@ if __name__ == '__main__':
               'legend.fontsize': 12}
     plt.rcParams.update(params)
 
-    plot_national("United States").show()
-
     # arg = args['<location>']
     # if args["-r"]:
     #     plot_regional(arg)
@@ -161,3 +145,10 @@ if __name__ == '__main__':
     #     plot_national(arg)
     # else:
     #     plot_city(arg)
+
+    loc = "Ontario"  # Case-sensitive!!!!
+    filename = "canada/plots/{}-plot.png".format(loc.replace(" ","").casefold())
+
+    # plot_city(loc).savefig(filename)
+    # plot_regional(loc).savefig(filename)
+    # plot_national(loc).savefig(filename)

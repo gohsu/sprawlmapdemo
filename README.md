@@ -10,6 +10,7 @@ Repo for sprawlmap region pages mockup & miscellaneous data explorations.
 
 * `time_graphs.py` is a cmd line program taking a city name as input and outputs a html file with the plotly graphs. 
 * `plots.py` has methods to generate plots for city, regional and national levels.
+* `create_desc.py` generates text descriptions for the data. (WIP)
 
 ## Data
 
