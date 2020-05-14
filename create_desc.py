@@ -32,7 +32,8 @@ def city_desc(arg_city):
                 no_data.append(years[i])
             else:
                 desc += "In {}, the SNDi was {}. ".format(years[i], round(city_df.sndi[i],2))
-        desc += "Data was not available for the following time periods: {}. ".format(no_data)
+        if len(no_data) is not 0:
+            desc += "Data was not available for the following time periods: {}. ".format(no_data)
     return desc
 
 
@@ -58,6 +59,7 @@ def ranking_desc(arg_city):
                 desc += "ranked {} in {}".format(p.ordinal(int(city_ranks[i])), years[i])
                 if i == 3: desc += ". "
                 else: desc += " and "
-        desc += "There was no ranking in these years due to unavailable data: {}".format(no_data)
+        if len(no_data) is not 0:
+            desc += "There was no ranking in these years due to unavailable data: {}".format(no_data)
     return desc
 
