@@ -6,6 +6,7 @@ import create_desc
 mode = "incremental"
 
 f = open("ontario.html", "a+")
+
 front_matter = """
 <head>
     <html lang="en"></html>
@@ -83,15 +84,15 @@ dropdown = """
         <div class="dropdown">
             <button class="dropbtn">Provinces</button>
             <div class="dropdown-content">
-                <a href="#">British Columbia</a>
-                <a href="#">Alberta</a>
-                <a href="#">Saskatchewan</a>
-                <a href="#">Manitoba</a>
-                <a href="#">Ontario</a>
-                <a href="#quebec">Quebec</a>
-                <a href="#">New Brunswick</a>
-                <a href="#">Nova Scotia</a>
-                <a href="#">Newfoundland and Labrador</a>
+                <a href=" ">British Columbia</a>
+                <a href=" ">Alberta</a>
+                <a href=" ">Saskatchewan</a>
+                <a href=" ">Manitoba</a>
+                <a href=" ">Ontario</a>
+                <a href="./quebec">Quebec</a>
+                <a href=" ">New Brunswick</a>
+                <a href=" ">Nova Scotia</a>
+                <a href=" ">Newfoundland and Labrador</a>
         </div>
     </h2>"""
 f.write(front_matter)
