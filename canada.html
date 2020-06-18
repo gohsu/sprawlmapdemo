@@ -1,14 +1,20 @@
-
-<head>
-    <html lang="en"></html>
-    <meta charset="utf-8"/>
-    <title>SNDI</title>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SNDi - Canada</title>
     <style>
         body{
             max-width: 800px;
             font-family:sans-serif;
-            text-align: center;
             margin:auto;
+        }
+
+        div{
+            margin:auto;
+        }
+
+        h1, h2{
+            text-align: center;
         }
 
         p{
@@ -17,78 +23,51 @@
             text-align: justify;
             line-height: 1.6;
         }
+        </style>
+    <script src="scripts.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <h1>Street-network Sprawl in Canada</h1>
+    <div id="intro">
+      <h3>What is Street-network sprawl?</h3>
+      <p>Street-network Sprawl is a way to measure urban sprawl, worldwide, through the connectedness of the streets. Less sprawl means more connected, more walkable streets.
 
-        h3{
-            text-decoration: underline;
-        }
 
-        div{
-            margin:auto;
-        }
+Well-connected streets – like New York City’s grid – are more walkable and can be served by public transit.
 
-        .dropbtn {
-            font-size: larger;
-            cursor: pointer;
-            background-color: transparent;
-            text-decoration: underline;
-            border:none;
-        }
 
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            font-size: large;
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color:white;
-            box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            white-space: nowrap;
-        }
-
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            padding: 10px 20px;
-            display: block;
-            font-size: medium;
-            text-decoration: none;
-        }
-
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {background-color: #f1f1f1}
-
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-    </style>    
-
-</head>
-
-<h1> Canada </h1>
-<p>
-    Street-network Sprawl is a way to measure urban sprawl, worldwide, through the connectedness of the streets. Less sprawl means more connected, more walkable streets. 
-    Well-connected streets – like New York City’s grid – are more walkable and can be served by public transit. 
+Our measure for street-network sprawl is the sprawl index, or the SNDi (Street Network Disconnectedness Index). A higher SNDi means less-connected streets – i.e., more sprawl.
 
     
-    Our measure for street-network sprawl is the sprawl index, or the SNDi (Street Network Disconnectedness Index). A higher SNDi means less-connected streets – i.e., more sprawl.
+The street network is permanent, and its connectivity affects the livability and environmental footprint of cities for decades and centuries to come. In places with more connected streets, residents drive less and walk more. Sprawl is associated with worse outcomes for health, the environment, overconsumption, social segregation, and equity.
 
-    
-    The street network is permanent, and its connectivity affects the livability and environmental footprint of cities for decades and centuries to come. In places with more connected streets, residents drive less and walk more. Sprawl is associated with worse outcomes for health, the environment, overconsumption, social segregation, and equity.
-
-    
-    Here, we explore how sprawl in Canada has changed over time.
-    </p><img src='plots/canada-cum.png' /> 
-<p>The cumulative and incremental level of street network disconnectivity in canada change over time in the same way. </p> 
-<img src='plots/canada.png' /> 
-<p>In Canada, the overall level of street network sprawl is 2.73. In Canada, new street layouts initially increased in disconnectivity, until the peak in 1991-2000. </p> 
-<p>The levels of SNDi for each time period in Canada's 4 most populous regions are plotted too. The cities in Canada that do not follow the same trend in SNDi are: Québec. </p> 
-<p>To date, Canada is the 2nd-most disconnected country out of the 3 countries in Northern America. It has largely maintained its place in the ranks since 1975. In <1975, it ranked 2nd, ranked 2nd in 1976-1990 and ranked 2nd in 1991-2000 and ranked 3rd in 2001-2014. </p> 
-<p>In comparison to the rest of the world, Canada has the 121st-most disconnected street network out of 188 countries. It has largely maintained its place in the ranks since 1975. In <1975, it ranked 116th, ranked 79th in 1976-1990 and ranked 95th in 1991-2000 and ranked 113th in 2001-2014. </p> 
-</body></html>
+</p>
+    </div>
+    <p>Explore on the 
+      <a href="https://sprawlmap.org/">sprawlmap</a>
+    </p>
+    <div id="levels-comp">
+      <h3>SNDi over time</h3>
+      <img src="Canada/Canada-country-comp.png">
+    </div>
+    <div id="time-comp">
+      <h3>Incremental and Cumulative SNDi</h3>
+      <img src="Canada/Canada-incremental-ctr.png">
+      <img src="Canada/Canada-cumulative-ctr.png">
+    </div>
+    <div id="related">
+      <p>The 3 most populous regions in Canada are: </p>
+      <ul>
+        <li>
+          <a href="Ontario.html">Ontario</a>
+        </li>
+        <li>
+          <a href="Quebec.html">Québec</a>
+        </li>
+        <li>
+          <a href="BritishColumbia.html">British Columbia</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
