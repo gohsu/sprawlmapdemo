@@ -2,78 +2,106 @@
 <html>
   <head>
     <title>SNDi - Istanbul</title>
-    <style>
-        body{
-            max-width: 800px;
-            font-family:sans-serif;
-            margin:auto;
-        }
-    
-        div{
-            margin:auto;
-        }
-        
-        h1, h2{
-            text-align: center;
-        }
-    
-        p{
-            font-size: 16px;
-            padding-top: 1em;
-            text-align: justify;
-            line-height: 1.6;
-        }
-        </style>
-    <script src="scripts.js" type="text/javascript"></script>
+    <link href="main.css" rel="stylesheet">
   </head>
   <body>
     <h1>Street-network Sprawl in Istanbul</h1>
-    <div id="intro">
+    <section id="intro">
       <h3>What is Street-network sprawl?</h3>
-      <p>Street-network Sprawl is a way to measure urban sprawl, worldwide, through the connectedness of the streets. Less sprawl means more connected, more walkable streets.
-
-
-Well-connected streets – like New York City’s grid – are more walkable and can be served by public transit.
-
-
-Our measure for street-network sprawl is the sprawl index, or the SNDi (Street Network Disconnectedness Index). A higher SNDi means less-connected streets – i.e., more sprawl.
-
-    
-The street network is permanent, and its connectivity affects the livability and environmental footprint of cities for decades and centuries to come. In places with more connected streets, residents drive less and walk more. Sprawl is associated with worse outcomes for health, the environment, overconsumption, social segregation, and equity.
-
-</p>
-    </div>
-    <h2>Istanbul: city in 
-      <a href="Istanbul.html">Istanbul</a>, 
-      <a href="Turkey.html">Turkey</a>
-    </h2>
-    <img src="Istanbul/Istanbul-geom.png">
-    <textarea>*placeholder* (gif here)</textarea>
+      <p>Street-network Sprawl is a way to measure urban sprawl, worldwide, through the connectedness of the streets. 
+            Less sprawl means more connected, more walkable streets.
+            Well-connected streets – like New York City’s grid – are more walkable and can be served by public transit.
+            </p>
+      <p>The street network is permanent, and its connectivity affects the livability and environmental footprint of cities for decades and centuries to come. 
+            In places with more connected streets, residents drive less and walk more. 
+            Sprawl is associated with worse outcomes for health, the environment, overconsumption, social segregation, and equity.
+            </p>
+      <h3>SNDi -- our measure of “sprawl” (disconnectedness)</h3>
+      <p>Our measure for street-network sprawl is the sprawl index, or the SNDi (Street Network Disconnectedness Index).The SNDi captures: 
+        <ul>
+          <li>
+            <i>nodal degree</i>
+          </li>
+          <li>
+            <i>dendricity</i>, the tree-likeness of the street network
+          </li>
+          <li>
+            <i>circuity</i>, the ratio of the distance by road to the straight-line distance of two locations on the street network
+          </li>
+          <li>
+            <i>sinuosity</i>, the curviness of a street
+          </li>
+        </ul>
+      </p>
+      <p>A higher SNDi means less-connected streets – i.e., more sprawl.</p>
+    </section>
+    <section>
+      <h2>Istanbul: city in 
+        <a href="Istanbul.html" target="_blank">Istanbul</a>, 
+        <a href="Turkey.html" target="_blank">Turkey</a>
+      </h2>
+      <img src="Istanbul/Istanbul-geom.png">
+      <textarea>*placeholder* (gif here)</textarea>
+    </section>
     <p>View on the 
-      <a href="https://sprawlmap.org/#9/40.9950669345/29.0310228371">sprawlmap</a>
+      <a href="https://sprawlmap.org/#9/40.9950669345/29.0310228371" target="_blank">sprawlmap</a>
     </p>
-    <div id="levels-comp">
-      <h3>SNDi over time</h3>
-      <img src="Istanbul/Istanbul-city-comp.png">
-    </div>
-    <div id="time-comp">
-      <h3>Incremental and Cumulative SNDi</h3>
-      <img src="Istanbul/Istanbul-incremental-city.png">
-      <img src="Istanbul/Istanbul-cumulative-city.png">
-    </div>
-    <div id="related-cities">
-      <p>As of 2015, Istanbulhad a built-up area of 718.203491211square kilometers. These are other cities with approximately the same built-up area:</p>
-      <ul>
-        <li>
-          <a href="Montreal.html">Montreal</a>
-        </li>
-        <li>
-          <a href="Indianapolis.html">Indianapolis</a>
-        </li>
-      </ul>
-    </div>
-    <p>For more information about population, urban extent and density, and roads, visit the 
+    <section>
+      <button class="accordion">How have Istanbul's street networks changed over time?</button>
+      <div class="panel">
+        <img class="center" src="Istanbul/Istanbul-city-comp.png">
+        <img class="center" src="Istanbul/Istanbul-incremental-lengths-city.png">
+        <p>
+          <b>Currently: </b>Taking into account all of the streets constructed in Istanbul up till 2014, the overall level of street network sprawl is 1.45. The SNDi ranges from a score of 0 (high connectivity), to ?? (high disconnectivity). With an SNDi of 1.45, the street network in Istanbul is relatively well-connected. 
+        </p>
+        <p>
+          <b>Street construction in each period: </b>In each period, new street development is more disconnected than in the last. 
+        </p>
+        <p>
+          <b>Street network sprawl in the city: </b>Overall, this leads to a rise in cumulative disconnectivity: since 1975, the city has become more disconnected. 
+        </p>
+      </div>
+    </section>
+    <section>
+      <button class="accordion">How does street-network connectivity in Istanbul compare to the region/country in each time period?</button>
+      <div class="panel">
+        <img class="center" src="Istanbul/Istanbul-incremental-city.png">
+        <div id="comparison_inc">
+          <p>Since 1975, the region has become more disconnected. The total level of street network sprawl in Istanbul is lower than the regional level. The level of disconnectivity in new street development in Istanbul follows the same trend as Istanbul. </p>
+          <p>To date, Istanbul is the 6th-most disconnected city out of the 6 cities in Istanbul. It has maintained its place in the ranks since 1975. In &lt;1975, it ranked 5th, ranked 5th in 1976-1990 and ranked 4th in 1991-2000 and ranked 3rd in 2001-2014. </p>
+          <p>In Turkey, the level of disconnectivity in new street layouts dipped, increasing in 1976-1990 onwards. Compared to Turkey, the level of disconnectivity in Istanbul is lower overall. The level of disconnectivity in new street development in Istanbul does not follow the national trend. Between &lt;1975 and 1976-1990, national SNDi was decreasing instead. </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <button class="accordion">How does overall level of street-network connectivity in Istanbul compare to the region/country?</button>
+      <div class="panel">
+        <img class="center" src="Istanbul/Istanbul-cumulative-city.png">
+        <div id="comparison_cum">
+          <p>Since 1975, the region has become more disconnected. The total level of street network sprawl in Istanbul is lower than the regional level. The level of disconnectivity in new street development in Istanbul follows the same trend as Istanbul. </p>
+          <p>To date, Istanbul is the 6th-most disconnected city out of the 6 cities in Istanbul. It has maintained its place in the ranks since 1975. In &lt;1975, it ranked 5th, ranked 5th in 1976-1990 and ranked 5th in 1991-2000 and ranked 6th in 2001-2014. </p>
+          <p>In Turkey, the level of disconnectivity in new street layouts dipped, increasing in 1976-1990 onwards. Compared to Turkey, the level of disconnectivity in Istanbul is lower overall. The level of disconnectivity in new street development in Istanbul does not follow the national trend. Between &lt;1975 and 1976-1990, national SNDi was decreasing instead. </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <button class="accordion">What about other similarly-sized cities?</button>
+      <div class="panel">
+        <p>As of 2015, Istanbul had a built-up area of 718.203491211 square kilometers.</p>
+        <p>These are other cities with approximately the same built-up area:</p>
+        <ul>
+          <li>
+            <a href="Montreal.html">Montreal</a>
+          </li>
+          <li>
+            <a href="Indianapolis.html">Indianapolis</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <p>For some related information about population, urban extent and density, and roads, visit the 
       <a href="http://atlasofurbanexpansion.org/cities/view/Istanbul">Atlas of Urban Expansion</a>.
     </p>
+    <script src="script.js" type="text/javascript"></script>
   </body>
 </html>
