@@ -27,6 +27,7 @@
     <script src="scripts.js" type="text/javascript"></script>
   </head>
   <body>
+    <h1>Street-network Sprawl in Québec</h1>
     <section id="intro">
       <h3>What is Street-network sprawl?</h3>
       <p>Street-network Sprawl is a way to measure urban sprawl, worldwide, through the connectedness of the streets. 
@@ -60,31 +61,64 @@
       <a href="Canada.html">Canada</a>
     </h2>
     <textarea>*placeholder* (gif here)</textarea>
-    <p>Explore on the 
-      <a href="https://sprawlmap.org/">sprawlmap</a>
+    <p>View on the 
+      <a href="https://sprawlmap.org/#5/45.5326900345/-73.6682294894">sprawlmap</a>
     </p>
-    <div id="levels-comp">
-      <h3>SNDi over time</h3>
-      <img src="Quebec/Quebec-region-comp.png">
-    </div>
-    <div id="time-comp">
-      <h3>Incremental and Cumulative SNDi</h3>
-      <img src="Quebec/Quebec-incremental-region.png">
-      <img src="Quebec/Quebec-cumulative-region.png">
-    </div>
-    <div id="related-cities">
-      <p>The 3 most populous cities in Québec are: </p>
-      <ul>
-        <li>
-          <a href="Montreal.html">Montreal</a>
-        </li>
-        <li>
-          <a href="Quebec.html">Quebec</a>
-        </li>
-        <li>
-          <a href="Sherbrooke.html">Sherbrooke</a>
-        </li>
-      </ul>
-    </div>
+    <section>
+      <button class="accordion">How have Québec's street networks changed over time?</button>
+      <div class="panel">
+        <img src="Quebec/Quebec-region-comp.png">
+        <p>
+          <b>Trends in street network construction: </b>Taking into account all roads in Québec, the overall level of street network sprawl is 2.59. New street construction in Québec has been increasing in disconnectivity over time. This increase has slowed: between &lt;1975 and 1976-1990, SNDi rose by 1.35 points, but between 1991-2000 and 2001-2014, it rose by just 0.48. 
+        </p>
+        <p>
+          <b>Effect on the aggregate network: </b>Taking into account all roads in Québec, the overall level of street network sprawl is 2.59. New street construction in Québec has been increasing in disconnectivity over time. This increase has slowed: between &lt;1975 and 1976-1990, SNDi rose by 0.34 points, but between 1991-2000 and 2001-2014, it rose by just 0.14. 
+        </p>
+      </div>
+    </section>
+    <section>
+      <button class="accordion">How connected are new additions to the street-network connectivity in Québec, compared to its cities?</button>
+      <div class="panel">
+        <img src="Quebec/Quebec-incremental-region.png">
+        <div>
+          <p>The 3 most populous cities in Québec are: </p>
+          <ul>
+            <li>
+              <a href="Montreal.html">Montreal</a>
+            </li>
+            <li>
+              <a href="Quebec.html">Quebec</a>
+            </li>
+            <li>
+              <a href="Sherbrooke.html">Sherbrooke</a>
+            </li>
+          </ul>
+          <p>The levels of SNDi for each time period in Québec's 3 most populous cities are plotted too. The cities in Québec that do not follow the same trend in SNDi are: Quebec, Sherbrooke. </p>
+          <p>To date, Québec is the 6th-most disconnected region out of the 9 regions in Canada. It has largely maintained its place in the ranks since 1975. In &lt;1975, it ranked 6th, ranked 4th in 1976-1990 and ranked 5th in 1991-2000 and ranked 5th in 2001-2014. </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <button class="accordion">How does the overall level of street-network connectivity in Québec compare to its cities?</button>
+      <div class="panel">
+        <img src="Quebec/Quebec-cumulative-region.png">
+        <div>
+          <p>The 3 most populous cities in Québec are: </p>
+          <ul>
+            <li>
+              <a href="Montreal.html">Montreal</a>
+            </li>
+            <li>
+              <a href="Quebec.html">Quebec</a>
+            </li>
+            <li>
+              <a href="Sherbrooke.html">Sherbrooke</a>
+            </li>
+          </ul>
+          <p>The levels of SNDi for each time period in Québec's 3 most populous cities are plotted too. The cities in Québec that do not follow the same trend in SNDi are: Quebec, Sherbrooke. </p>
+          <p>To date, Québec is the 6th-most disconnected region out of the 9 regions in Canada. It has largely maintained its place in the ranks since 1975. In &lt;1975, it ranked 6th, ranked 7th in 1976-1990 and ranked 7th in 1991-2000 and ranked 6th in 2001-2014. </p>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

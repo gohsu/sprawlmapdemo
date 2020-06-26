@@ -36,6 +36,13 @@ p{
     font-size: 18px;
 }
 
+.accordion:after{
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 10px;
+  float: right;
+}
+
+
 .active, .accordion:hover {
     background-color: #ccc;
     text-decoration:underline;
@@ -43,6 +50,7 @@ p{
 
 .active:after {
     background-color: #ccc;
+    content: "\2796";
 }
 
 .panel {
