@@ -2,22 +2,31 @@
 <html>
   <head>
     <title>SNDi - Montreal</title>
+    <meta charset="utf-8">
     <link href="main.css" rel="stylesheet">
   </head>
   <body>
-    <h1>Street-network Sprawl in Montreal</h1>
-    <section id="intro">
+    <div class="container" id="page-title">
+      <h1>Street-network Sprawl in Montreal</h1>
+      <hr>
+    </div>
+    <div class="container" id="intro">
       <h3>What is Street-network sprawl?</h3>
-      <p>Street-network Sprawl is a way to measure urban sprawl, worldwide, through the connectedness of the streets. 
-            Less sprawl means more connected, more walkable streets.
-            Well-connected streets – like New York City’s grid – are more walkable and can be served by public transit.
-            </p>
-      <p>The street network is permanent, and its connectivity affects the livability and environmental footprint of cities for decades and centuries to come. 
-            In places with more connected streets, residents drive less and walk more. 
-            Sprawl is associated with worse outcomes for health, the environment, overconsumption, social segregation, and equity.
-            </p>
+      <p>Street-network Sprawl is a way to measure urban sprawl, worldwide, through 
+        the connectedness of the streets. Less sprawl means more connected, more walkable 
+        streets. Well-connected streets – like New York City’s grid – are more walkable 
+        and can be served by public transit.
+        </p>
+      <p>The street network is permanent, and its connectivity affects the livability 
+        and environmental footprint of cities for decades and centuries to come. In places 
+        with more connected streets, residents drive less and walk more. A well-connected 
+        street network is associated with better outcomes for health, the environment, 
+        sustainable consumption, social integration, and equity.
+        </p>
+      <p>We can quantify how connected street networks are with the Street Network 
+        Disconnectedness Index (SNDi).</p>
       <h3>SNDi -- our measure of “sprawl” (disconnectedness)</h3>
-      <p>Our measure for street-network sprawl is the sprawl index, or the SNDi (Street Network Disconnectedness Index).The SNDi captures: 
+      <p>The SNDi is a comprehensive measurement of “sprawl”. It captures: 
         <ul>
           <li>
             <i>nodal degree</i>
@@ -34,74 +43,91 @@
         </ul>
       </p>
       <p>A higher SNDi means less-connected streets – i.e., more sprawl.</p>
-    </section>
-    <section>
-      <h2>Montreal: city in 
-        <a href="quebec.html" target="_blank">Québec</a>, 
-        <a href="canada.html" target="_blank">Canada</a>
-      </h2>
-      <img src="Montreal/Montreal-geom.png">
-      <textarea>*placeholder* (gif here)</textarea>
-    </section>
-    <p>View on the 
-      <a href="https://sprawlmap.org/#9/45.5326900345/-73.6682294894" target="_blank">sprawlmap</a>
-    </p>
-    <section>
-      <button class="accordion">How have Montreal's street networks changed over time?</button>
-      <div class="panel">
-        <img class="center" src="Montreal/Montreal-city-comp.png">
-        <img class="center" src="Montreal/Montreal-incremental-lengths-city.png">
-        <p>
-          <b>Most recent snapshot: </b>Taking into account all of the streets constructed in Montreal up till 2014, the overall level of street network sprawl is 1.81. The SNDi ranges from a score of 0 (high connectivity), to ?? (high disconnectivity). With an SNDi of 1.81, the street network in Montreal is relatively well-connected. 
-        </p>
-        <p>
-          <b>Trends in street network construction: </b>In each period, new street development is more disconnected than in the last. This increase has slowed: between &lt;1975 and 1976-1990, SNDi rose by 1.4 points, but between 1991-2000 and 2001-2014, it rose by just 0.54. 
-        </p>
-        <p>
-          <b>Effect on the aggregate network: </b>Overall, this leads to a rise in cumulative disconnectivity: since 1975, the city has become more disconnected. 
-        </p>
-      </div>
-    </section>
-    <section>
-      <button class="accordion">How connected are new additions to the street-network connectivity in Montreal, compared to the region/country in each time period?</button>
-      <div class="panel">
-        <img class="center" src="Montreal/Montreal-incremental-city.png">
-        <div id="comparison_inc">
-          <p>Since 1975, the region has become more disconnected. The total level of street network sprawl in Montreal is lower than the regional level. The level of disconnectivity in new street development in Montreal follows the same trend as Québec. </p>
-          <p>To date, Montreal is the 7th-most disconnected city out of the 9 cities in Québec. It has maintained its place in the ranks since 1975. In &lt;1975, it ranked 7th, ranked 6th in 1976-1990 and ranked 7th in 1991-2000 and ranked 6th in 2001-2014. </p>
-          <p>In Canada, new street layouts initially increased in disconnectivity, until the peak in 1991-2000. Compared to Canada, the level of disconnectivity in Montreal is lower overall. The level of disconnectivity in new street development in Montreal does not follow the national trend. Between 1991-2000 and 2001-2014, national SNDi was decreasing instead. </p>
-        </div>
-      </div>
-    </section>
-    <section>
-      <button class="accordion">How does the overall level of street-network connectivity in Montreal compare to the region/country?</button>
-      <div class="panel">
-        <img class="center" src="Montreal/Montreal-cumulative-city.png">
-        <div id="comparison_cum">
-          <p>Since 1975, the region has become more disconnected. The total level of street network sprawl in Montreal is lower than the regional level. The level of disconnectivity in new street development in Montreal follows the same trend as Québec. </p>
-          <p>To date, Montreal is the 7th-most disconnected city out of the 9 cities in Québec. It has maintained its place in the ranks since 1975. In &lt;1975, it ranked 7th, and remained in this position since.</p>
-          <p>Since 1975, Canada has become more disconnected. Compared to Canada, the level of disconnectivity in Montreal is lower overall. The level of disconnectivity in new street development in Montreal follows the same trend as Canada. </p>
-        </div>
-      </div>
-    </section>
-    <section>
-      <button class="accordion">What about other similarly-sized cities?</button>
-      <div class="panel">
-        <p>As of 2015, Montreal had a built-up area of 774.961853027 square kilometers.</p>
-        <p>These are other cities with approximately the same built-up area:</p>
+      <p>More information on the sprawl index can be found in these research papers: 
         <ul>
           <li>
-            <a href="hangzhou.html">Hangzhou</a>
+            <a href="https://www.pnas.org/content/117/4/1941">Global trends toward urban street-network sprawl</a>
           </li>
           <li>
-            <a href="istanbul.html">Istanbul</a>
+            <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0223078">A global assessment of street-network sprawl</a>
           </li>
         </ul>
-      </div>
-    </section>
-    <p>For some related information about population, urban extent and density, and roads, visit the 
-      <a href="http://atlasofurbanexpansion.org/cities/view/Montreal">Atlas of Urban Expansion</a>.
-    </p>
+      </p>
+    </div>
+    <div class="container" id="content">
+      <section>
+        <h2>Montreal: city in 
+          <a href="quebec.html" target="_blank">Québec</a>, 
+          <a href="canada.html" target="_blank">Canada</a>
+        </h2>
+        <img src="montreal/montreal-geom.png">
+        <textarea>*placeholder* (gif here)</textarea>
+      </section>
+      <p>View on the 
+        <a href="https://sprawlmap.org/#9/45.5326900345/-73.6682294894" target="_blank">sprawlmap</a>
+      </p>
+      <section>
+        <button class="accordion">How have Montreal's street networks changed over time?</button>
+        <div class="panel">
+          <img class="center" src="montreal/montreal-city-comp.png">
+          <img class="center" src="montreal/montreal-lengths-city.png">
+          <p>
+            <b>Most recent snapshot: </b>Taking into account all of the streets constructed in Montreal up till 2014, the overall level of street network sprawl is 1.81. The SNDi ranges from a score of 0 (high connectivity), to ?? (high disconnectivity). With an SNDi of 1.81, the street network in Montreal is relatively well-connected. 
+          </p>
+          <p>
+            <b>Trends in street network construction: </b>In each period, new street development is more disconnected than in the last. This increase has slowed: between &lt;1975 and 1976-1990, SNDi rose by 1.4 points, but between 1991-2000 and 2001-2014, it rose by just 0.54. 
+          </p>
+          <p>
+            <b>Effect on the aggregate network: </b>Overall, this leads to a rise in cumulative disconnectivity: since 1975, the city has become more disconnected. 
+          </p>
+        </div>
+      </section>
+      <section>
+        <button class="accordion">How connected are new additions to the street-network connectivity in Montreal, compared to the region/country in each time period?</button>
+        <div class="panel">
+          <img class="center" src="montreal/montreal-incremental-city.png">
+          <div id="comparison_inc">
+            <p>Since 1975, the region has become more disconnected. The total level of street network sprawl in Montreal is lower than the regional level. The level of disconnectivity in new street development in Montreal follows the same trend as Québec. </p>
+            <p>To date, Montreal is the 7th-most disconnected city out of the 9 cities in Québec. It has maintained its place in the ranks since 1975. In &lt;1975, it ranked 7th, ranked 6th in 1976-1990 and ranked 7th in 1991-2000 and ranked 6th in 2001-2014. </p>
+            <p>In Canada, new street layouts initially increased in disconnectivity, until the peak in 1991-2000. Compared to Canada, the level of disconnectivity in Montreal is lower overall. The level of disconnectivity in new street development in Montreal does not follow the national trend. Between 1991-2000 and 2001-2014, national SNDi was decreasing instead. </p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <button class="accordion">How does the overall level of street-network connectivity in Montreal compare to the region/country?</button>
+        <div class="panel">
+          <img class="center" src="montreal/montreal-cumulative-city.png">
+          <div id="comparison_cum">
+            <p>Since 1975, the region has become more disconnected. The total level of street network sprawl in Montreal is lower than the regional level. The level of disconnectivity in new street development in Montreal follows the same trend as Québec. </p>
+            <p>To date, Montreal is the 7th-most disconnected city out of the 9 cities in Québec. It has maintained its place in the ranks since 1975. In &lt;1975, it ranked 7th, and remained in this position since.</p>
+            <p>Since 1975, Canada has become more disconnected. Compared to Canada, the level of disconnectivity in Montreal is lower overall. The level of disconnectivity in new street development in Montreal follows the same trend as Canada. </p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <button class="accordion">What about other similarly-sized cities?</button>
+        <div class="panel">
+          <p>As of 2015, Montreal had a built-up area of 774.961853027 square kilometers.</p>
+          <p>These are other cities with approximately the same built-up area:</p>
+          <ul>
+            <li>
+              <a href="hangzhou.html">Hangzhou</a>
+            </li>
+            <li>
+              <a href="istanbul.html">Istanbul</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <div class="container" id="extra-info">
+      <p>For some related information about population, urban extent and density, and roads, visit the 
+        <a href="http://atlasofurbanexpansion.org/cities/view/Montreal">Atlas of Urban Expansion</a>.
+      </p>
+    </div>
     <script src="script.js" type="text/javascript"></script>
+    <footer>
+      <a href="https://sprawlmap.org/">The Street-network Sprawl Map</a>
+    </footer>
   </body>
 </html>
